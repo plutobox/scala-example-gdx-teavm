@@ -6,7 +6,6 @@ object ProjectSettings {
   lazy val assetsDirectory = settingKey[File]("Directory with game's assets")
 
   val buildJavaScript = taskKey[Unit]("Transpile bytecode to JavaScript via TeaVM")
-  lazy val jettyRun = taskKey[Unit]("Start Jetty Server for TeaVM JavaScript")
 
   lazy val root = commonSettings
   lazy val core = commonSettings ++ Dependencies.core
@@ -35,7 +34,7 @@ object ProjectSettings {
     Compile / unmanagedResourceDirectories += assetsDirectory.value,
     fork := true, // Pretty sure you need this
     javaOptions ++= Seq(
-      "-XstartOnFirstThread",
+//      "-XstartOnFirstThread",
       "-Dorg.eclipse.jetty.LEVEL=DEBUG" // Control jetty logging
     ),
     resolvers ++= Seq(
