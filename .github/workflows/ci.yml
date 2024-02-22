@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  build_Linux:
+    name: Build Windows/Linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v3
+        with:
+          path: feature
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 11
+          cache: sbt
+
+      - name: Compile and build javaScript
+        working-directory: feature
+        run: sbt "compile" && sbt "compile/buildJavaScript"
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v3
+        with:
+          path: pages
+          ref: gh-pages
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Clean pages directory
+        shell: bash
+        working-directory: pages
+        run: rm -rf ${{ steps.extract_branch.outputs.branch }}
+
+      - name: Copy javascript release into pages directory
+        shell: bash
+        run: cp -r feature/teavm/build/dist/webapp pages/${{ steps.extract_branch.outputs.branch }}
+
+      - name: Commit gh pages for feature
+        uses: EndBug/add-and-commit@v9
+        with:
+          cwd: pages
+          message: "Release for ${{ steps.extract_branch.outputs.branch }}"

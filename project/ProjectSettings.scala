@@ -6,7 +6,6 @@ object ProjectSettings {
   lazy val assetsDirectory = settingKey[File]("Directory with game's assets")
 
   val buildJavaScript = taskKey[Unit]("Transpile bytecode to JavaScript via TeaVM")
-  lazy val jettyRun = taskKey[Unit]("Start Jetty Server for TeaVM JavaScript")
 
   lazy val root = commonSettings
   lazy val core = commonSettings ++ Dependencies.core
@@ -16,7 +15,7 @@ object ProjectSettings {
       mainClass = "com.pluto.box.TeaVMBuilder",
       classpath = (Runtime / fullClasspath).value.files,
       options = Array(""),
-      log = streams.value.log
+      log = streams.value.log,
     ),
     containerArgs := Seq("--path", "/", "teavm/build/dist/webapp"),
   )
@@ -35,14 +34,14 @@ object ProjectSettings {
     Compile / unmanagedResourceDirectories += assetsDirectory.value,
     fork := true, // Pretty sure you need this
     javaOptions ++= Seq(
-      "-XstartOnFirstThread",
-      "-Dorg.eclipse.jetty.LEVEL=DEBUG" // Control jetty logging
+      "-Dorg.eclipse.jetty.LEVEL=DEBUG", // Control jetty logging
+      "-XstartOnFirstThread", // Control jetty logging
     ),
     resolvers ++= Seq(
       "jitpack" at "https://jitpack.io",
       "teavm" at "https://teavm.org/maven/repository/",
     ),
-    cancelable in Global := true // allow to use Ctrl + C in sbt prompt
+    cancelable in Global := true, // allow to use Ctrl + C in sbt prompt
   )
 
   private lazy val commonSettings = general
