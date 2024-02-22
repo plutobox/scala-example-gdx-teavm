@@ -23,7 +23,7 @@ class TestGame extends Game {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
     batch.begin()
     batch.draw(image, 10, 10)
-    font.draw(batch, "Hey there :)", Gdx.graphics.getWidth / 2, Gdx.graphics.getHeight / 2)
+    font.draw(batch, "Not much here is there?", Gdx.graphics.getWidth / 2, Gdx.graphics.getHeight / 2)
     batch.end()
   }
 }
