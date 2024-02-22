@@ -69,7 +69,7 @@ class BreakoutGame extends Game {
     // add entities
 //    ashleyEngine.addEntity(ball)
 //    ashleyEngine.addEntity(paddle)
-    blocks.foreach(println) // line should be blocks.foreach(ashleyEngine.addEntity)
+//    blocks.foreach(println) // line should be blocks.foreach(ashleyEngine.addEntity)
 
     // add systems
 //    ashleyEngine.addSystem(new MouseXTrackingMovementSystem)
