@@ -34,7 +34,6 @@ object ProjectSettings {
     Compile / unmanagedResourceDirectories += assetsDirectory.value,
     fork := true, // Pretty sure you need this
     javaOptions ++= Seq(
-//      "-XstartOnFirstThread",
       "-Dorg.eclipse.jetty.LEVEL=DEBUG" // Control jetty logging
     ),
     resolvers ++= Seq(
