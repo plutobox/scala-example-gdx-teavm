@@ -24,12 +24,14 @@ object Dependencies {
   lazy val teaVMJsoImpl ="org.teavm" % "teavm-jso-impl" % Versions.teaVMVersion
   lazy val gdxTeaVM = "com.github.xpenatan.gdx-teavm" % "backend-teavm" % Versions.gdxTeaVMVersion
   lazy val gdxFreetypeTeaVM = "com.github.xpenatan.gdx-teavm" % "gdx-freetype-teavm" % Versions.gdxTeaVMVersion
+  lazy val ashley = "com.badlogicgames.ashley" % "ashley" % "1.7.4"
 
   lazy val core = depends(
     slf4j,
     gdxPlatform,
     gdxFreetype,
     gdxFreetypePlatform,
+    ashley
   )
 
   lazy val desktop = depends(

@@ -5,6 +5,9 @@ import com.github.xpenatan.gdx.backends.teavm.{TeaApplication, TeaApplicationCon
 object TeaVMLauncher {
   def main(args: Array[String]): Unit = {
     val config = new TeaApplicationConfiguration("canvas")
-    new TeaApplication(new TestGame, config)
+    // Setting these to 0 will fill all available space on web browser
+    config.width = 0
+    config.height = 0
+    new TeaApplication(new BreakoutGame, config)
   }
 }

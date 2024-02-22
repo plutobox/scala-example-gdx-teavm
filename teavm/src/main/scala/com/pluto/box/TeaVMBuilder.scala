@@ -1,5 +1,6 @@
 package com.pluto.box
 
+import com.github.xpenatan.gdx.backends.teavm.config.plugins.TeaReflectionSupplier
 import com.github.xpenatan.gdx.backends.teavm.config.{TeaBuildConfiguration, TeaBuilder}
 import com.github.xpenatan.gdx.backends.teavm.gen.SkipClass
 import org.teavm.vm.TeaVMOptimizationLevel
@@ -18,6 +19,11 @@ object TeaVMBuilder {
 
     // Register any classes or packages that require reflection here:
     // TeaReflectionSupplier.addReflectionClass("com.pluto.box.reflect")
+
+    // Unsure if these are necessary
+    TeaReflectionSupplier.addReflectionClass("com.pluto.box.component")
+    TeaReflectionSupplier.addReflectionClass("com.pluto.box.util")
+    TeaReflectionSupplier.addReflectionClass("com.pluto.box.system")
 
     val tool = TeaBuilder.config(teaBuildConfiguration)
     tool.setOptimizationLevel(TeaVMOptimizationLevel.ADVANCED)
