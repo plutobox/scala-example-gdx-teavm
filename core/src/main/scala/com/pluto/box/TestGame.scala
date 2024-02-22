@@ -14,6 +14,7 @@ class TestGame extends Game {
   override def dispose(): Unit = {
     batch.dispose()
     font.dispose()
+    image.dispose()
     super.dispose()
   }
 
