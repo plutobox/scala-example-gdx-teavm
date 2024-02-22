@@ -45,10 +45,11 @@ class BreakoutGame extends Game {
       .add(new RenderableComponent)
   }
 
-  lazy val blocks: Seq[Entity] = {
+  // If you `flatten` or `flatMap` this TeaVM won't compile.
+  lazy val blocks: Seq[IndexedSeq[Entity]] = {
     val blockWidth = 63
     val blockHeight = 20
-    (Gdx.graphics.getWidth / 2 to Gdx.graphics.getHeight by blockHeight + 10).zipWithIndex.flatMap({case (y: Int, colorIndex: Int) =>
+    (Gdx.graphics.getWidth / 2 to Gdx.graphics.getHeight by blockHeight + 10).zipWithIndex.map({case (y: Int, colorIndex: Int) =>
       (0 to Gdx.graphics.getWidth by blockWidth + 10).map(x => {
         val positionComponent = new PositionComponent
         positionComponent.x = x
@@ -67,22 +68,20 @@ class BreakoutGame extends Game {
 
   override def create(): Unit = {
     // add entities
-//    ashleyEngine.addEntity(ball)
-//    ashleyEngine.addEntity(paddle)
-//    blocks.foreach(println) // line should be blocks.foreach(ashleyEngine.addEntity)
+    ashleyEngine.addEntity(ball)
+    ashleyEngine.addEntity(paddle)
+    blocks.foreach(_.foreach(ashleyEngine.addEntity))
 
     // add systems
-//    ashleyEngine.addSystem(new MouseXTrackingMovementSystem)
-//    ashleyEngine.addSystem(new MovementSystem)
-//    ashleyEngine.addSystem(new RenderingSystem(shapeRenderer))
+    ashleyEngine.addSystem(new MouseXTrackingMovementSystem)
+    ashleyEngine.addSystem(new MovementSystem)
+    ashleyEngine.addSystem(new RenderingSystem(shapeRenderer))
   }
 
   override def render(): Unit = {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-//    ashleyEngine.update(Gdx.graphics.getDeltaTime)
-    shapeRenderer.setColor(Color.BLUE)
-    shapeRenderer.circle(50, 50, 50)
+    ashleyEngine.update(Gdx.graphics.getDeltaTime)
     shapeRenderer.end()
   }
 }
