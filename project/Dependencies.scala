@@ -35,7 +35,7 @@ object Dependencies {
   lazy val desktop = depends(
     gdxBackendLwjgl3,
     gdxFreetypePlatformNativesDesktop,
-    gdxPlatformNativesDesktop
+    gdxPlatformNativesDesktop,
   )
 
   lazy val teavm = depends(
