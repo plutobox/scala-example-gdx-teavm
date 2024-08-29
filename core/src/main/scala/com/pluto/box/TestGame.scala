@@ -7,7 +7,7 @@ import com.badlogic.gdx.{Game, Gdx}
 class TestGame extends Game {
   lazy val image = new Texture(Gdx.files.internal("libgdxlogo.png")) // If this throws, run `sbt compile` and try again.
   lazy val batch = new SpriteBatch()
-  lazy val font = new BitmapFont()
+  lazy val font = new BitmapFont(Gdx.files.internal("lsans-15.fnt"))
 
   override def create(): Unit = {}
 

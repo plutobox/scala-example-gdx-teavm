@@ -22,6 +22,11 @@ Every branch will have its own release to `gh-pages`.
 
 ### Local usage
 
+Be sure you are using correct java version 11.
+```
+sdk use java 11.0.14-zulu
+```
+
 Compile and transpile js.
 ```
 make js
