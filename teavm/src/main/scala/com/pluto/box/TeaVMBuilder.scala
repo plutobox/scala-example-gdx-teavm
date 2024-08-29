@@ -15,17 +15,17 @@ object TeaVMBuilder {
     teaBuildConfiguration.webappPath = new File("build/dist").getCanonicalPath
 
     // Register any extra classpath assets here:
-    // teaBuildConfiguration.additionalAssetsClasspathFiles += "com/pluto/box/asset.extension"
+    // teaBuildConfiguration.additionalAssetsClasspathFiles.add("com/badlogic/gdx/utils")
 
     // Register any classes or packages that require reflection here:
     // TeaReflectionSupplier.addReflectionClass("com.pluto.box.reflect")
 
     val tool = TeaBuilder.config(teaBuildConfiguration)
     tool.setOptimizationLevel(TeaVMOptimizationLevel.FULL)
-    tool.setObfuscated(true)
-    tool.setShortFileNames(true)
+//    tool.setObfuscated(true)
+//    tool.setShortFileNames(true)
     tool.setStrict(false) // setting this = true breaks teavm
-    tool.setSourceMapsFileGenerated(false)
+//    tool.setSourceMapsFileGenerated(true)
     tool.setMainClass("com.pluto.box.TeaVMLauncher")
     TeaBuilder.build(tool)
   }
