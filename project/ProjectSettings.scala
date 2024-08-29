@@ -35,7 +35,7 @@ object ProjectSettings {
     fork := true, // Pretty sure you need this
     javaOptions ++= Seq(
       "-Dorg.eclipse.jetty.LEVEL=DEBUG", // Control jetty logging
-      "-XstartOnFirstThread", // Control jetty logging
+      //"-XstartOnFirstThread", // Control jetty logging
     ),
     resolvers ++= Seq(
       "jitpack" at "https://jitpack.io",
